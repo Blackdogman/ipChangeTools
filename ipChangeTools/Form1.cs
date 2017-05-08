@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ipChangeTools.Tools;
+using System.Collections;
 
 namespace ipChangeTools
 {
@@ -46,19 +47,20 @@ namespace ipChangeTools
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //string xmlFilePath = Application.StartupPath;
-            //String msg = XmlMaster.GenerateXMLFile(xmlFilePath);
-            String msg = XmlMaster.GenerateXMLFile("./ipAddress.xml");
-            if (msg != "")
+            XmlMaster.GenerateXMLFile("./ipAddress.xml");
+            XmlMaster.AddXmlInformation("./ipAddress.xml","测试添加","192.168.0.110","255.255.255.0","192.168.0.1");
+            List<Hashtable> hsList = XmlMaster.GetXMLInformation("./ipAddress.xml");
+            foreach(Hashtable hs in hsList)
             {
-                MessageBox.Show(msg);
+                MessageBox.Show("local:"+hs["local"]+"\nip:"+hs["ip"]+"\nmask:"+hs["mask"]+"\ngateway:"+hs["gateway"]);
+                comboBox2.Items.Add(hs["local"]);
             }
-            MessageBox.Show("创建完成，开始添加");
-            msg = XmlMaster.AddXmlInformation("./ipAddress.xml","测试添加","192.168.0.110","255.255.255.0","192.168.0.1");
-            if (msg != "")
-            {
-                MessageBox.Show(msg);
-            }
+            comboBox2.SelectedIndex = 0;
+            Hashtable hs1 = hsList.First<Hashtable>();
+            label9.Text = hs1["ip"].ToString() ;
+            label10.Text = hs1["mask"].ToString();
+            label11.Text = hs1["gateway"].ToString();
+
         }
     }
 }
