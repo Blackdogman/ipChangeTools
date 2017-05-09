@@ -50,6 +50,7 @@ namespace ipChangeTools
             }
         }
 
+        //完成IP的修改
         private void button1_Click(object sender, EventArgs e)
         {
             string nic = comboBox1.Text;
@@ -58,6 +59,7 @@ namespace ipChangeTools
             string[] getway = { label11.Text };
             string[] dns = null;
             IpManager.SetIpAddress(nic,ip,submask,getway,dns);
+            MessageBox.Show(this,"修改完成！");
         }
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
@@ -76,8 +78,8 @@ namespace ipChangeTools
 
         private void 恢复自动获取IPToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //IpManager.SetAutoIP(comboBox1.Text);
             IpManager.EnableDHCP(comboBox1.Text);
+            MessageBox.Show(this, "还原完成！");
         }
     }
 }

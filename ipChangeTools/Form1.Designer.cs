@@ -47,6 +47,7 @@
             this.设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.恢复自动获取IPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.修改XML配置文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.请使用管理员权限打开ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -175,10 +176,11 @@
             this.menuStrip1.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(28, 28);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.设置ToolStripMenuItem});
+            this.设置ToolStripMenuItem,
+            this.请使用管理员权限打开ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(520, 37);
+            this.menuStrip1.Size = new System.Drawing.Size(520, 36);
             this.menuStrip1.TabIndex = 15;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -188,7 +190,7 @@
             this.恢复自动获取IPToolStripMenuItem,
             this.修改XML配置文件ToolStripMenuItem});
             this.设置ToolStripMenuItem.Name = "设置ToolStripMenuItem";
-            this.设置ToolStripMenuItem.Size = new System.Drawing.Size(66, 33);
+            this.设置ToolStripMenuItem.Size = new System.Drawing.Size(66, 32);
             this.设置ToolStripMenuItem.Text = "设置";
             // 
             // 恢复自动获取IPToolStripMenuItem
@@ -204,6 +206,12 @@
             this.修改XML配置文件ToolStripMenuItem.Size = new System.Drawing.Size(274, 34);
             this.修改XML配置文件ToolStripMenuItem.Text = "修改XML配置文件";
             this.修改XML配置文件ToolStripMenuItem.Click += new System.EventHandler(this.修改XML配置文件ToolStripMenuItem_Click);
+            // 
+            // 请使用管理员权限打开ToolStripMenuItem
+            // 
+            this.请使用管理员权限打开ToolStripMenuItem.Name = "请使用管理员权限打开ToolStripMenuItem";
+            this.请使用管理员权限打开ToolStripMenuItem.Size = new System.Drawing.Size(234, 32);
+            this.请使用管理员权限打开ToolStripMenuItem.Text = "请使用管理员权限打开";
             // 
             // Form1
             // 
@@ -258,6 +266,7 @@
         private System.Windows.Forms.ToolStripMenuItem 设置ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 恢复自动获取IPToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 修改XML配置文件ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 请使用管理员权限打开ToolStripMenuItem;
     }
 }
 

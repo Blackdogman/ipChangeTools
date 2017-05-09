@@ -26,14 +26,14 @@ namespace ipChangeTools.Tools
                 //添加根节点到xml中
                 xmlDoc.AppendChild(rootElement);
 
-                ////创建第一层节点
-                //XmlElement topElement = xmlDoc.CreateElement("data");
-                ////给第一层节点写入属性值
-                //topElement.SetAttribute("local","本地测试");
-                //topElement.SetAttribute("ip","192.168.0.233");
-                //topElement.SetAttribute("mask","255.255.255.0");
-                //topElement.SetAttribute("gateway","192.168.0.1");
-                //rootElement.AppendChild(topElement);
+                //创建第一层节点
+                XmlElement topElement = xmlDoc.CreateElement("data");
+                //给第一层节点写入属性值
+                topElement.SetAttribute("local", "示例数据");
+                topElement.SetAttribute("ip", "192.168.0.233");
+                topElement.SetAttribute("mask", "255.255.255.0");
+                topElement.SetAttribute("gateway", "192.168.0.1");
+                rootElement.AppendChild(topElement);
 
                 xmlDoc.Save(xmlFilePath);
             }
