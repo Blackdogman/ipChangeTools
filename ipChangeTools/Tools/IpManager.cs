@@ -62,50 +62,6 @@ namespace ipChangeTools.Tools
                         return;
                     }
                 }
-                ////设置IP 自动获取  
-                //mo.InvokeMethod("EnableDHCP", null, null);  
-                ////设置DNS 自动获取  
-                //inPar = mo.GetMethodParameters("SetDNSServerSearchOrder");  
-                //inPar["DNSServerSearchOrder"] = null;  
-                //mo.InvokeMethod("SetDNSServerSearchOrder", inPar, null);  
-                //设置注册表的内容  
-                //RegistryKey rk = EditReg(nicid);
-                //if (rk != null)
-                //{
-                //    //rk.DeleteSubKey("DisableDhcpOnConnect");  
-                //    try
-                //    {
-                //        rk.DeleteValue("DisableDhcpOnConnect");
-                //    }
-                //    catch { }
-                //    try
-                //    {
-                //        rk.SetValue("EnableDHCP", "1", RegistryValueKind.DWord);
-                //    }
-                //    catch { }
-                //    try
-                //    {
-                //        rk.DeleteValue("NameServer");
-                //    }
-                //    catch { }
-                //    try
-                //    {
-                //        rk.SetValue("IPAddress", "0.0.0.0");
-                //    }
-                //    catch { }
-                //    try
-                //    {
-                //        rk.DeleteValue("SubnetMask");
-                //    }
-                //    catch { }
-                //    try
-                //    {
-                //        rk.DeleteValue("DefaultGateway");
-                //    }
-                //    catch { }
-                //    //rk.Flush();  
-                //    rk.Close();
-                //}
             }
         }
 

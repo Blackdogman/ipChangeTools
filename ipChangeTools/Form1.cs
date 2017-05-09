@@ -33,34 +33,39 @@ namespace ipChangeTools
             {
                 MessageBox.Show("未检测到有效的网卡,请检查是否网卡是否启用");
             }
+
+            //读取XML完成初始化
+            List<Hashtable> hsList = XmlMaster.GetXMLInformation("./ipAddress.xml");
+            if (hsList != null && hsList.Count>0)
+            {
+                foreach (Hashtable hs in hsList)
+                {
+                    comboBox2.Items.Add(hs["local"]);
+                }
+                comboBox2.SelectedIndex = 0;
+                Hashtable hs1 = hsList.First<Hashtable>();
+                label9.Text = hs1["ip"].ToString();
+                label10.Text = hs1["mask"].ToString();
+                label11.Text = hs1["gateway"].ToString();
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             string nic = comboBox1.Text;
-            string[] ip = { "192.168.0.233" };
-            string[] submask = { "255.255.255.0" };
-            string[] getway = { "192.168.0.1" };
+            string[] ip = { label9.Text };
+            string[] submask = { label10.Text };
+            string[] getway = { label11.Text };
             string[] dns = null;
             IpManager.SetIpAddress(nic,ip,submask,getway,dns);
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            XmlMaster.GenerateXMLFile("./ipAddress.xml");
-            XmlMaster.AddXmlInformation("./ipAddress.xml","测试添加","192.168.0.110","255.255.255.0","192.168.0.1");
-            List<Hashtable> hsList = XmlMaster.GetXMLInformation("./ipAddress.xml");
-            foreach(Hashtable hs in hsList)
-            {
-                MessageBox.Show("local:"+hs["local"]+"\nip:"+hs["ip"]+"\nmask:"+hs["mask"]+"\ngateway:"+hs["gateway"]);
-                comboBox2.Items.Add(hs["local"]);
-            }
-            comboBox2.SelectedIndex = 0;
-            Hashtable hs1 = hsList.First<Hashtable>();
-            label9.Text = hs1["ip"].ToString() ;
-            label10.Text = hs1["mask"].ToString();
-            label11.Text = hs1["gateway"].ToString();
-
+            Hashtable hs = XmlMaster.GetXMLSomeOne("./ipAddress.xml", "local", comboBox2.Text);
+            label9.Text = hs["ip"].ToString();
+            label10.Text = hs["mask"].ToString();
+            label11.Text = hs["gateway"].ToString();
         }
     }
 }
