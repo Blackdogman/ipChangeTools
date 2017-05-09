@@ -28,7 +28,7 @@ namespace ipChangeTools.Tools
         /// <param name="mask"></param>  
         /// <param name="way"></param>  
         /// <param name="dns"></param>  
-        public static void SetIpAddress(string nic, string[] ip, string[] mask, string[] way, string[] dns)
+        public static void SetIpAddress(string nic, string[] ip, string[] mask, string[] way,string[] dns)
         {
             nic = GetNICId(nic);
             ManagementClass wmi = new ManagementClass("Win32_NetworkAdapterConfiguration");
@@ -48,17 +48,17 @@ namespace ipChangeTools.Tools
                         inPar = mo.GetMethodParameters("EnableStatic");
                         inPar["IPAddress"] = ip;
                         inPar["SubnetMask"] = mask;
-                        outPar=mo.InvokeMethod("EnableStatic", inPar, null);
+                        outPar = mo.InvokeMethod("EnableStatic", inPar, null);
 
                         //设置网关地址   
                         inPar = mo.GetMethodParameters("SetGateways");
                         inPar["DefaultIPGateway"] = way;
-                        outPar=mo.InvokeMethod("SetGateways", inPar, null);
+                        outPar = mo.InvokeMethod("SetGateways", inPar, null);
 
                         //设置DNS   
                         inPar = mo.GetMethodParameters("SetDNSServerSearchOrder");
                         inPar["DNSServerSearchOrder"] = dns;
-                        outPar=mo.InvokeMethod("SetDNSServerSearchOrder", inPar, null);
+                        outPar = mo.InvokeMethod("SetDNSServerSearchOrder", inPar, null);
                         return;
                     }
                 }
@@ -133,7 +133,8 @@ namespace ipChangeTools.Tools
                         list.Add("(不可用)" + adapter.Description);
                     }
                 }
-            }else
+            }
+            else
             {
                 foreach (NetworkInterface adapter in nics)
                 {
@@ -163,6 +164,57 @@ namespace ipChangeTools.Tools
                 }
             }
             return name;
+        }
+
+        /// <summary>
+        /// 设置为自动IP
+        /// </summary>
+        ///  <param name="nic">要还原的设备名称</param>
+        public static void SetAutoIP(String nic)
+        {
+            nic = GetNICId(nic);
+            ManagementClass wmi = new ManagementClass("Win32_NetworkAdapterConfiguration");
+            ManagementObjectCollection moc = wmi.GetInstances();
+            foreach (ManagementObject mo in moc)
+            {
+                string nicid = mo.GetPropertyValue("SettingID").ToString();
+                if (nicid.Equals(nic))
+                {
+                    //如果没有启用IP设置的网络设备则跳过
+                    if (!(bool)mo["IPEnabled"])
+                        continue;
+                    //设置IP地址  
+                    mo.InvokeMethod("EnableStatic", null);
+                    //设置网关地址   
+                    mo.InvokeMethod("SetGateways", null);
+                    //重置DNS为空
+                    mo.InvokeMethod("SetDNSServerSearchOrder", null);
+                    //开启DHCP
+                    mo.InvokeMethod("EnableDHCP", null);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 启用DHCP服务
+        /// </summary>
+        public static void EnableDHCP(String nic)
+        {
+            nic = GetNICId(nic);
+            ManagementClass wmi = new ManagementClass("Win32_NetworkAdapterConfiguration");
+            ManagementObjectCollection moc = wmi.GetInstances();
+            foreach (ManagementObject mo in moc)
+            {
+                if (!(bool)mo["IPEnabled"])
+                    continue;
+
+                if (mo["SettingID"].ToString() == nic) //网卡接口标识是否相等, 相当只设置指定适配器IP地址
+                {
+                    mo.InvokeMethod("SetDNSServerSearchOrder", null);
+                    mo.InvokeMethod("EnableDHCP", null);
+
+                }
+            }
         }
     }
 }

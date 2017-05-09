@@ -73,5 +73,11 @@ namespace ipChangeTools
             String path = System.Environment.CurrentDirectory;
             System.Diagnostics.Process.Start(path+"/ipAddress.xml");
         }
+
+        private void 恢复自动获取IPToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //IpManager.SetAutoIP(comboBox1.Text);
+            IpManager.EnableDHCP(comboBox1.Text);
+        }
     }
 }

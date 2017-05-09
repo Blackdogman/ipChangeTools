@@ -196,6 +196,7 @@
             this.恢复自动获取IPToolStripMenuItem.Name = "恢复自动获取IPToolStripMenuItem";
             this.恢复自动获取IPToolStripMenuItem.Size = new System.Drawing.Size(274, 34);
             this.恢复自动获取IPToolStripMenuItem.Text = "恢复自动获取IP";
+            this.恢复自动获取IPToolStripMenuItem.Click += new System.EventHandler(this.恢复自动获取IPToolStripMenuItem_Click);
             // 
             // 修改XML配置文件ToolStripMenuItem
             // 
