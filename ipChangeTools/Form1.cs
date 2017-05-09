@@ -67,5 +67,11 @@ namespace ipChangeTools
             label10.Text = hs["mask"].ToString();
             label11.Text = hs["gateway"].ToString();
         }
+
+        private void 修改XML配置文件ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            String path = System.Environment.CurrentDirectory;
+            System.Diagnostics.Process.Start(path+"/ipAddress.xml");
+        }
     }
 }
